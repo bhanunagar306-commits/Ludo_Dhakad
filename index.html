@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ludo Dhakad</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2b2f3a">
+  <link rel="icon" href="icons/icon-192.png">
+</head>
+<body>
+  <div id="splash"><canvas id="fw"></canvas><img class="logo" src="images/logo-animated.gif" alt="Ludo Dhakad"><div class="bar"><i></i></div></div>
+  <div id="top-tools">
+    <button id="music" title="Music (N)">&#9835;</button>
+    <button id="mute" title="Sound (M)">&#128266;</button>
+    <button id="fs" title="Fullscreen">&#9974;</button>
+  </div>
+  <main>
+    <section id="setup">
+      <h1 class="brand-h1"><span class="shine"><img class="brand" src="images/logo.png" alt="Ludo Dhakad" onerror="this.parentNode.classList.add('broken')"></span></h1>
+      <div id="step1">
+        <button id="continue" class="wide" hidden>Continue Game</button>
+        <h2>How many players?</h2>
+        <div id="count-btns" class="big-row">
+          <button class="big" data-n="2"><span>2</span>Players</button>
+          <button class="big" data-n="3"><span>3</span>Players</button>
+          <button class="big" data-n="4"><span>4</span>Players</button>
+        </div>
+        <label class="theme-row">Theme <select class="theme-sel"></select></label>
+        <div class="vols"><label>Sound <input type="range" class="vol-sfx" min="0" max="100" value="100"></label><label>Music <input type="range" class="vol-music" min="0" max="100" value="80"></label></div>
+        <div class="big-row"><button id="m-stats" class="ghost mini">Stats</button><button id="s-exit" class="ghost mini">Exit Game</button></div>
+        <div id="menu-msg"></div>
+      </div>
+      <div id="step2" hidden>
+        <h2>Who plays?</h2>
+        <div class="opt-line"><b>Mode</b><div class="seg" id="mode-seg"></div></div>
+        <p class="hint" id="mode-desc"></p>
+        <div class="opt-line"><b>Turn timer</b><div class="seg" id="timer-seg"></div></div>
+        <p class="hint">Type a name. Tap the colour circle to change colour.</p>
+        <div id="seat-rows"></div>
+        <div id="err"></div>
+        <div class="big-row">
+          <button id="back" class="ghost">Back</button>
+          <button id="start">Start Game</button>
+        </div>
+      </div>
+    </section>
+    <section id="game" hidden>
+      <div id="game-bar">
+        <button id="btn-menu" class="mini">Menu</button>
+        <button id="btn-exit" class="mini ghost">Exit</button>
+      </div>
+      <div id="arena">
+        <div class="dice-row" id="dice-top"></div>
+        <div id="board"></div>
+        <div class="dice-row" id="dice-bottom"></div>
+      </div>
+      <small>Roll: F G H J &nbsp;·&nbsp; Move: click, or arrows + Enter &nbsp;·&nbsp; Sound: M &nbsp;·&nbsp; Menu: Esc</small>
+    </section>
+  </main>
+  <div id="pause" class="overlay" hidden><div class="card">
+    <h2>Paused</h2>
+    <label class="theme-row">Theme <select class="theme-sel"></select></label>
+        <div class="vols"><label>Sound <input type="range" class="vol-sfx" min="0" max="100" value="100"></label><label>Music <input type="range" class="vol-music" min="0" max="100" value="80"></label></div>
+    <button id="p-resume">Resume</button>
+    <button id="p-restart">Restart</button>
+    <button id="p-setup" class="ghost">Main Menu</button>
+    <button id="p-exit" class="ghost">Exit Game</button>
+  </div></div>
+  <div id="exit" class="overlay" hidden><div class="card">
+    <h2>Exit Ludo Dhakad?</h2>
+    <div id="exit-msg"></div>
+    <button id="x-quit">Exit Game</button>
+    <button id="x-cancel" class="ghost">Keep Playing</button>
+  </div></div>
+  <div id="stats" class="overlay" hidden><div class="card">
+    <h2>Stats</h2>
+    <div id="stats-body"></div>
+    <button id="st-close">Close</button>
+    <button id="st-reset" class="ghost">Reset</button>
+  </div></div>
+  <div id="result" class="overlay" hidden><div class="card">
+    <h2>Final Ranking</h2>
+    <ol id="rank-list"></ol>
+    <button id="r-again">Play Again</button>
+    <button id="r-setup" class="ghost">Main Menu</button>
+  </div></div>
+  <canvas id="fw-win" hidden></canvas>
+  <script src="game.js"></script>
+  <script src="ui.js"></script>
+  <script>
+    // Offline support (works on http/https only)
+    if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</body>
+</html>
