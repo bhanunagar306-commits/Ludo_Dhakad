@@ -353,3 +353,12 @@ img.brand { width: min(72vw, 300px); height: auto; filter: drop-shadow(0 8px 12p
 .vols { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 10px 0 4px; font-weight: 700; }
 .vols label { display: flex; align-items: center; gap: 8px; }
 .vols input[type=range] { width: 110px; accent-color: var(--accent); cursor: pointer; }
+
+/* ---------- v14: splash "click to start" (browser awaaz ke liye click maangta hai) ---------- */
+#splash { animation: none; }
+#splash.go { animation: splash 3.4s forwards; }
+#splash .bar i { animation: none; }
+#splash.go .bar i { animation: load 3.1s forwards; }
+#splash .tap { position: relative; z-index: 2; color: #fff; font-weight: 800; letter-spacing: 2px; font-size: 18px; text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6); animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .25; } }

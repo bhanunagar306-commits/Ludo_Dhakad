@@ -743,9 +743,23 @@
   function bigFireworks() { const cv = $("fw-win"); cv.hidden = false; runFw(cv, 2200, () => { cv.hidden = true; }); }
 
   /* ---------- Splash: animated logo + fireworks ---------- */
-  runFw($("fw"), 3000);
-  $("splash").onclick = () => $("splash").remove();
-  setTimeout(() => { const sp = $("splash"); if (sp) sp.remove(); }, 3500);
+  // Browser click ke bina awaaz nahi bajane deta. Isliye agar awaaz allowed nahi hai to pehle "Click to start" dikhate hain
+  function startSplash() {
+    const sp = $("splash");
+    if (!sp || sp.classList.contains("go")) return;
+    sp.classList.add("go"); $("tap").hidden = true;
+    audio(); startMusic();                              // click ke andar hi audio chalu
+    runFw($("fw"), 3000);
+    setTimeout(() => { sp.onclick = () => sp.remove(); }, 800);   // thodi der baad click se skip
+    setTimeout(() => { const s2 = $("splash"); if (s2) s2.remove(); }, 3500);
+  }
+  let audioOk = false;
+  try { const t = new (window.AudioContext || window.webkitAudioContext)(); audioOk = t.state === "running"; t.close(); } catch (e) { /* ignore */ }
+  if (audioOk) startSplash();                           // installed app me aksar seedha chal jata hai
+  else {
+    $("tap").hidden = false;
+    ["pointerdown", "keydown"].forEach((ev) => addEventListener(ev, startSplash, { once: true }));
+  }
 
   if (location.protocol === "file:") root.classList.add("local");   // file se kholne par mask-image block hota hai
   /* ---------- Volume sliders (Sound / Music) aur button click ki awaaz ---------- */

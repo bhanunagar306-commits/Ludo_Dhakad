@@ -1,5 +1,5 @@
 /* sw.js - service worker: game ko offline chalane ke liye files cache karta hai */
-const CACHE = "ludo-v9";   // game update karte waqt isse badlo: "ludo-v2", "ludo-v3"...
+const CACHE = "ludo-v10";   // game update karte waqt isse badlo: "ludo-v2", "ludo-v3"...
 const FILES = ["./", "index.html", "style.css", "game.js", "ui.js", "manifest.json",
                "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png",
                "images/logo.png", "images/logo-animated.gif"];
